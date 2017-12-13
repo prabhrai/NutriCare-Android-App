@@ -1,0 +1,52 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:weightSum="1"
+        android:focusableInTouchMode="true">
+
+
+        <!--<TextView-->
+            <!--android:id="@+id/txtresponseweight"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginBottom="20sp"-->
+            <!--android:layout_marginLeft="60dp"-->
+            <!--android:layout_marginRight="60dp"-->
+            <!--android:layout_marginTop="30sp"-->
+            <!--android:layout_weight="0.55"-->
+            <!--android:backgroundTint="@color/colorAccent"-->
+            <!--android:hint="Res"-->
+            <!--android:padding="5sp"-->
+            <!--android:textAlignment="center" />-->
+
+
+        <Button
+            android:id="@+id/btnGetUserWeight"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="100dp"
+            android:layout_marginRight="100dp"
+            android:layout_marginTop="20sp"
+            android:text="Get Weight Log TOAST" />
+
+
+    <ListView
+        android:id="@+id/itemsListView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="0dp"
+        android:background="@android:color/darker_gray" />
+
+
+    </LinearLayout>
+
+    <!---->
+    <!--<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"-->
+    <!--xmlns:tools="http://schemas.android.com/tools"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:background="?android:attr/colorControlActivated">-->
+
+
+<!--</ScrollView>-->

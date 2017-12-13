@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">NutriCare</string>
+    <string name="companyLabel">Nutricare</string>
+    <string name="welcomeLabel">Welcome to NutriCare</string>
+    <string name="btnLogin">Login</string>
+    <string name="btnRegister">Register</string>
+    <string name="btnCancel">Cancel</string>
+    <string name="btnSubmit">Submit</string>
+    <string name="hint_user_name">User Name</string>
+    <string name="hint_password">Password</string>
+</resources>

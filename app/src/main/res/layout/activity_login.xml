@@ -1,0 +1,92 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?android:attr/colorControlActivated"
+    >
+
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clickable="false"
+        android:orientation="vertical"
+        android:weightSum="1"
+        android:focusableInTouchMode="true">
+
+
+        <EditText
+            android:id="@+id/txtUserName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20sp"
+            android:layout_marginLeft="60dp"
+            android:layout_marginRight="60dp"
+            android:layout_marginTop="60sp"
+            android:backgroundTint="@color/colorAccent"
+            android:hint="User Name"
+            android:padding="5sp"
+            android:textAlignment="center" />
+        <!--android:text="@string/welcomeLabel"-->
+
+
+        <EditText
+            android:id="@+id/txtUserPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20sp"
+            android:layout_marginLeft="60dp"
+            android:layout_marginRight="60dp"
+            android:layout_marginTop="20sp"
+            android:backgroundTint="@color/colorAccent"
+            android:hint="Password"
+            android:inputType="textPassword"
+            android:padding="5sp"
+            android:textAlignment="center" />
+        <!--android:text="@string/welcomeLabel"-->
+
+        <Button
+            android:id="@+id/btnLogin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:layout_marginLeft="100dp"
+            android:layout_marginRight="100dp"
+            android:layout_marginTop="20sp"
+            android:text="@string/btnLogin" />
+
+        <Button
+            android:id="@+id/btnRegister"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="100dp"
+            android:layout_marginRight="100dp"
+            android:layout_marginTop="20sp"
+            android:text="@string/btnRegister" />
+
+
+        <Switch
+            android:id="@+id/rememberLoginSwitch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+
+            android:layout_marginTop="40sp"
+
+            android:switchPadding="20sp"
+
+            android:text="Remember Username "
+            android:thumbTint="@color/colorPrimary"
+            android:trackTint="@android:color/white" />
+
+
+
+
+
+
+
+
+    </LinearLayout>
+
+
+</ScrollView>
