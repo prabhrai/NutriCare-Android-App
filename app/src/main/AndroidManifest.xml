@@ -23,6 +23,7 @@
 
         <activity android:name=".RegisterActivity" />
         <activity android:name=".WeightLogActivity" />
+        <activity android:name=".AddLogActivity" />
 
         <activity
 

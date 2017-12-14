@@ -1,6 +1,7 @@
 package com.murach.prabhdeep.nutricare;
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -66,11 +67,14 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
 
+import static android.R.attr.name;
+
 
 public class LoginActivity extends Activity {
     // Instantiate the RequestQueue.
 
-
+    SharedPreferences sharedpreferences;
+    public static final String mypreference = "mypref";
     private RequestQueue queue;
     //    RequestQueue queue = newRequestQueue(getApplicationContext());
     String loginURL = "https://nutricare.xyz/php/validate_user.php";
@@ -81,28 +85,58 @@ public class LoginActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        sharedpreferences = getSharedPreferences(mypreference,
+                Context.MODE_PRIVATE);
+
+        // get reference to edittexts for user input
+        final EditText usernameET = (EditText) findViewById(R.id.txtUserName);
+        final EditText passwordET = (EditText) findViewById(R.id.txtUserPassword);
         Switch remUN = (Switch) findViewById(R.id.rememberLoginSwitch);
-        Boolean switchState = remUN.isChecked();
+
+
+        if (sharedpreferences.contains("Username")) {
+            usernameET.setText(sharedpreferences.getString("Username", ""));
+        }
+        if (sharedpreferences.contains("Remember")) {
+            String remStatus = sharedpreferences.getString("Remember", "");
+            if (remStatus.equalsIgnoreCase("true")){
+                remUN.setChecked(true);
+            }
+        }
+
+
 
         remUN.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    SharedPreferences.Editor editor = sharedpreferences.edit();
+
                     if (isChecked) {
                         // The toggle is enabled
                     Log.d("NUTRICare tag" , "State checked");
+                        Toast.makeText(getApplicationContext(), "Username is saved.",
+                                Toast.LENGTH_SHORT).show();
+                        editor.putString("Username", usernameET.getText().toString());
+                        editor.putString("Remember", "true");
+
 
                     } else {
                         // The toggle is disabled
+                        Toast.makeText(getApplicationContext(), "Username is not saved.",
+                                Toast.LENGTH_SHORT).show();
+                        editor.remove("Username");
+                        editor.putString("Remember", "false");
                     }
-                 }
+
+                    editor.commit();
+
+                }
 
             }
         );
 
 
-        // get reference to edittexts for user input
-        final EditText usernameET = (EditText) findViewById(R.id.txtUserName);
-        final EditText passwordET = (EditText) findViewById(R.id.txtUserPassword);
+
 
         // delete
 //        usernameET.setText("user@gmail.com");

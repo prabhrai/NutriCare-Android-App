@@ -16,7 +16,7 @@
 
 
         <EditText
-            android:id="@+id/txtUserName"
+            android:id="@+id/txtUserCurrentWeight"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="20sp"
@@ -24,39 +24,24 @@
             android:layout_marginRight="60dp"
             android:layout_marginTop="60sp"
             android:backgroundTint="@color/colorAccent"
-            android:hint="User Name"
+            android:hint="Current Weight"
             android:padding="5sp"
             android:textAlignment="center" />
         <!--android:text="@string/welcomeLabel"-->
 
-
-        <EditText
-            android:id="@+id/txtUserPassword"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="20sp"
-            android:layout_marginLeft="60dp"
-            android:layout_marginRight="60dp"
-            android:layout_marginTop="20sp"
-            android:backgroundTint="@color/colorAccent"
-            android:hint="Password"
-            android:inputType="textPassword"
-            android:padding="5sp"
-            android:textAlignment="center" />
-        <!--android:text="@string/welcomeLabel"-->
 
         <Button
-            android:id="@+id/btnLogin"
+            android:id="@+id/btnCancel"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="20dp"
             android:layout_marginLeft="100dp"
             android:layout_marginRight="100dp"
             android:layout_marginTop="20sp"
-            android:text="@string/btnLogin" />
+            android:text="Cancel" />
 
         <Button
-            android:id="@+id/btnRegister"
+            android:id="@+id/btnAddULog"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="100dp"
@@ -64,29 +49,6 @@
             android:layout_marginTop="20sp"
             android:text="@string/btnRegister" />
 
-
-        <Switch
-            android:id="@+id/rememberLoginSwitch"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-
-            android:layout_marginTop="40sp"
-
-            android:switchPadding="20sp"
-
-            android:text="Remember Username "
-            android:thumbTint="@color/colorPrimary"
-            android:trackTint="@android:color/white" />
-
-
-
-
-
-
-
-
     </LinearLayout>
-
 
 </ScrollView>

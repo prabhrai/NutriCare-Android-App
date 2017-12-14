@@ -9,13 +9,13 @@ public class AddLogActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);     
         
-        // set the view for the activity using XML
-//        setContentView(R.layout.activity_main);
-
+//         set the view for the activity using XML
+        setContentView(R.layout.activity_add_log);
+//
 //        TipCalculatorFragment tcf = (TipCalculatorFragment) getFragmentManager().findFragmentById(R.layout.activity_main);
-
-        System.out.println(" ------------------------ tip calculator fragment working -------------------------------");
-        getFragmentManager().beginTransaction().replace(android.R.id.content,new AddLogFragment()).commit();
+//
+//        System.out.println(" ------------------------ tip calculator fragment working -------------------------------");
+//        getFragmentManager().beginTransaction().replace(android.R.id.content,new AddLogFragment()).commit();
 
     }
 }

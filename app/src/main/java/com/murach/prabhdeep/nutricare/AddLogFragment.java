@@ -23,14 +23,14 @@ import android.widget.TextView.OnEditorActionListener;
 import java.text.NumberFormat;
 
 public class AddLogFragment extends Fragment
-implements OnEditorActionListener, OnClickListener {
+        implements OnEditorActionListener, OnClickListener {
 
 
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        
+
 //        // set the default values for the preferences
 //        PreferenceManager.setDefaultValues(getActivity(),
 //                R.xml.preferences, false);
@@ -45,7 +45,7 @@ implements OnEditorActionListener, OnClickListener {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        
+
         // inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_add_log,
                 container, false);
@@ -86,13 +86,14 @@ implements OnEditorActionListener, OnClickListener {
 //        billAmountEditText.setText(billAmountString);
 
         // calculate and display
-        calculateAndDisplay();
+//        calculateAndDisplay();
     }
 
     public void calculateAndDisplay() {
+        /*
         // get the bill amount
         billAmountString = billAmountEditText.getText().toString();
-        float billAmount; 
+        float billAmount;
         if (billAmountString.equals("")) {
             billAmount = 0;
         }
@@ -128,11 +129,13 @@ implements OnEditorActionListener, OnClickListener {
 
         NumberFormat percent = NumberFormat.getPercentInstance();
         percentTextView.setText(percent.format(tipPercentToDisplay));
+        */
     }
 
     @Override
     public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-        int keyCode = -1; 
+        /*
+        int keyCode = -1;
         if (event != null) {
             keyCode = event.getKeyCode();
         }
@@ -142,51 +145,54 @@ implements OnEditorActionListener, OnClickListener {
             keyCode == KeyEvent.KEYCODE_DPAD_CENTER ||
             keyCode == KeyEvent.KEYCODE_ENTER) {
             calculateAndDisplay();
-        }        
+        }
+
+        */
         return false;
     }
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()) {
-        case R.id.percentDownButton:
-            tipPercent = tipPercent - .01f;
-            calculateAndDisplay();
-            break;
-        case R.id.percentUpButton:
-            tipPercent = tipPercent + .01f;
-            calculateAndDisplay();
-            break;
-        }
+//        switch (v.getId()) {
+//        case R.id.percentDownButton:
+//            tipPercent = tipPercent - .01f;
+//            calculateAndDisplay();
+//            break;
+//        case R.id.percentUpButton:
+//            tipPercent = tipPercent + .01f;
+//            calculateAndDisplay();
+//            break;
+//        }
     }
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        
-        // attempt to get an instance of the SettingsFragment object
-        SettingsFragment settingsFragment = (SettingsFragment) getFragmentManager()
-                .findFragmentById(R.id.settings_fragment);
-        
-        // if the SettingsFragment object is null, display the appropriate menu
-        if (settingsFragment == null) {
-            inflater.inflate(R.menu.fragment_tip_calculator, menu);
-        } else {
-            inflater.inflate(R.menu.fragment_tip_calculator_twopane, menu);
-        }
+
+//        // attempt to get an instance of the SettingsFragment object
+//        SettingsFragment settingsFragment = (SettingsFragment) getFragmentManager()
+//                .findFragmentById(R.id.settings_fragment);
+//
+//        // if the SettingsFragment object is null, display the appropriate menu
+//        if (settingsFragment == null) {
+//            inflater.inflate(R.menu.fragment_tip_calculator, menu);
+//        } else {
+//            inflater.inflate(R.menu.fragment_tip_calculator_twopane, menu);
+//        }
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-        case R.id.menu_settings:
-            startActivity(new Intent(getActivity(), SettingsActivity.class));
-            return true;
-        case R.id.menu_about:
-            startActivity(new Intent(getActivity(), AboutActivity.class));
-            return true;
-
-        default:
-            return super.onOptionsItemSelected(item);
-        }
+//        switch (item.getItemId()) {
+//            case R.id.menu_settings:
+//                startActivity(new Intent(getActivity(), SettingsActivity.class));
+//                return true;
+//            case R.id.menu_about:
+//                startActivity(new Intent(getActivity(), AboutActivity.class));
+//                return true;
+//
+//            default:
+//                return super.onOptionsItemSelected(item);
+//        }
+        return true;
     }
 }

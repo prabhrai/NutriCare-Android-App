@@ -55,6 +55,10 @@ public class UserWeightDB {
     public static final String DROP_USER_WEIGHT_TABLE =
             "DROP TABLE IF EXISTS " + USERWEIGHT_TABLE;
 
+    public static final String TRIM_USER_WEIGHT_TABLE =
+            "DELETE from " + USERWEIGHT_TABLE;
+
+
     private static class DBHelper extends SQLiteOpenHelper {
 
         public DBHelper(Context context, String name,
@@ -104,6 +108,13 @@ public class UserWeightDB {
         if (db != null)
             db.close();
     }
+
+    public void TrimDB(){
+        this.openWriteableDB();
+        db.execSQL(TRIM_USER_WEIGHT_TABLE);
+        this.closeDB();
+    }
+
 
     // public methods
     public ArrayList<UserWeightLog> getUserWeightLog() {

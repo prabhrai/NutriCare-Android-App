@@ -67,7 +67,7 @@ public class WeightLogActivity extends Activity {
 
 
         final UserWeightDB db = new UserWeightDB(this);
-
+        db.TrimDB();
 
         final Intent intent_add_log = new Intent(getApplicationContext(), AddLogActivity.class);
 
@@ -81,13 +81,12 @@ public class WeightLogActivity extends Activity {
                                    });
 
         StringBuilder sb = new StringBuilder();
-        final UserWeightLog uwl = new UserWeightLog("name111", "352311452345", 1121.11, 111.11);
-        long insertId = db.insertUserWeightLog(uwl);
-        if (insertId > 0) {
-            sb.append("Row inserted! Insert Id: " + insertId + "\n");
-        }
-
-        Toast.makeText(getApplicationContext(), "DB Status " + insertId, Toast.LENGTH_SHORT).show();
+//        final UserWeightLog uwl = new UserWeightLog("name111", "352311452345", 1121.11, 111.11);
+//        long insertId = db.insertUserWeightLog(uwl);
+//        if (insertId > 0) {
+//            sb.append("Row inserted! Insert Id: " + insertId + "\n");
+//        }
+//        Toast.makeText(getApplicationContext(), "DB Status " + insertId, Toast.LENGTH_SHORT).show();
 
         Button btnn = (Button) findViewById(R.id.btnGetUserWeight);
         btnn.setOnClickListener(new View.OnClickListener() {
@@ -126,7 +125,7 @@ public class WeightLogActivity extends Activity {
                                         UWL_list.add(ulog);
 
                                         long insertID_ = db.insertUserWeightLog(ulog);
-                                        Toast.makeText(getApplicationContext(), insertID_ + " " , Toast.LENGTH_LONG).show();
+//                                        Toast.makeText(getApplicationContext(), insertID_ + " " , Toast.LENGTH_LONG).show();
 
 //                                        Toast.makeText(getApplicationContext(), username + " " + date + " " + weight + " " + bmi,
 //                                                Toast.LENGTH_LONG).show();
