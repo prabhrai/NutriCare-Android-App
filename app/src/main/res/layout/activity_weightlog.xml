@@ -27,7 +27,7 @@
         android:layout_marginLeft="100dp"
         android:layout_marginRight="100dp"
         android:layout_marginTop="20sp"
-        android:text="Add User Weight Log" />
+        android:text="Add Weight Log" />
 
         <Button
             android:id="@+id/btnGetUserWeight"
@@ -36,7 +36,9 @@
             android:layout_marginLeft="100dp"
             android:layout_marginRight="100dp"
             android:layout_marginTop="20sp"
-            android:text="Get Weight Log TOAST" />
+            android:layout_marginBottom="20sp"
+
+            android:text="Get Weight Log" />
 
 
 
@@ -80,7 +82,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="0dp"
-        android:background="@android:color/darker_gray" />
+        android:background="@android:color/background_light" />
 
 
     </LinearLayout>

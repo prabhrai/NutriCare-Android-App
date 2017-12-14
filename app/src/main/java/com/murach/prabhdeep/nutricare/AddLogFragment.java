@@ -121,6 +121,9 @@ public class AddLogFragment extends Fragment
             final String log_date = GetToday();
 
             final Intent loginIntent = new Intent(context,LoginActivity.class);
+            final Intent weightLogIntent = new Intent(context,WeightLogActivity.class);
+
+            weightLogIntent.putExtra("username",username);
 
             txtUserWeight = (EditText) getView().findViewById(R.id.txtUserCurrentWeight);
             final String tempWT = txtUserWeight.getText().toString();
@@ -158,7 +161,7 @@ public class AddLogFragment extends Fragment
 
                                 Toast.makeText(context, "Log Added Successfully",
                                         Toast.LENGTH_SHORT).show();
-                                startActivity(loginIntent);
+                                startActivity(weightLogIntent);
                             }
                             else if (response.trim().equalsIgnoreCase("failure")) {
 

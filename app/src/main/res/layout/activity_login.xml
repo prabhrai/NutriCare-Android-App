@@ -70,21 +70,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-
             android:layout_marginTop="40sp"
-
             android:switchPadding="20sp"
 
             android:text="Remember Username "
             android:thumbTint="@android:color/black"
             android:trackTint="@android:color/black" />
-
-
-
-
-
-
-
 
     </LinearLayout>
 
