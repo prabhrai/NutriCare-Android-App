@@ -61,11 +61,24 @@ public class WeightLogActivity extends Activity {
         itemsListView = (ListView) findViewById(R.id.itemsListView);
 
 
+        Intent intent = getIntent();
+        final String username = intent.getStringExtra("username");
+
+
+
         final UserWeightDB db = new UserWeightDB(this);
 
 
+        final Intent intent_add_log = new Intent(getApplicationContext(), AddLogActivity.class);
 
+        Button btn_add = (Button) findViewById(R.id.btnAddUserWeightLog);
+        btn_add.setOnClickListener(new View.OnClickListener() {
+                                       public void onClick(View v) {
+                                           startActivity(intent_add_log);
+                                           intent_add_log.putExtra("username",username);
+                                       }
 
+                                   });
 
         StringBuilder sb = new StringBuilder();
         final UserWeightLog uwl = new UserWeightLog("name111", "352311452345", 1121.11, 111.11);
@@ -160,8 +173,7 @@ public class WeightLogActivity extends Activity {
                     @Override
                     protected Map<String, String> getParams() {
                         Map<String, String> params = new HashMap<String, String>();
-                        Intent intent = getIntent();
-                        String username = intent.getStringExtra("username");
+
 
                         params.put("username", username);
 
