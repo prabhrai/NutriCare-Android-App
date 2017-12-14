@@ -100,16 +100,13 @@ public class LoginActivity extends Activity {
         );
 
 
-
-
-
         // get reference to edittexts for user input
         final EditText usernameET = (EditText) findViewById(R.id.txtUserName);
         final EditText passwordET = (EditText) findViewById(R.id.txtUserPassword);
 
         // delete
-        usernameET.setText("user@gmail.com");
-        passwordET.setText("password");
+//        usernameET.setText("user@gmail.com");
+//        passwordET.setText("password");
 
 
         // ------------------------------------------------------------------------------------------------ get user login
@@ -120,6 +117,9 @@ public class LoginActivity extends Activity {
                 // Click event trigger here
                 final Intent intent = new Intent(getApplicationContext(), WeightLogActivity.class);
 //                startActivity(intent);
+                intent.putExtra("username",usernameET.getText().toString());
+
+
                 queue = Volley.newRequestQueue(getApplicationContext());
                 // Request a string response from the provided URL.
                 StringRequest stringRequest = new StringRequest(

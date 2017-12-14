@@ -61,7 +61,12 @@ public class WeightLogActivity extends Activity {
         itemsListView = (ListView) findViewById(R.id.itemsListView);
 
 
-        UserWeightDB db = new UserWeightDB(this);
+        final UserWeightDB db = new UserWeightDB(this);
+
+
+
+
+
         StringBuilder sb = new StringBuilder();
         final UserWeightLog uwl = new UserWeightLog("name111", "352311452345", 1121.11, 111.11);
         long insertId = db.insertUserWeightLog(uwl);
@@ -70,9 +75,6 @@ public class WeightLogActivity extends Activity {
         }
 
         Toast.makeText(getApplicationContext(), "DB Status " + insertId, Toast.LENGTH_SHORT).show();
-
-
-
 
         Button btnn = (Button) findViewById(R.id.btnGetUserWeight);
         btnn.setOnClickListener(new View.OnClickListener() {
@@ -110,6 +112,8 @@ public class WeightLogActivity extends Activity {
                                         ulog.setBmi(Double.parseDouble(bmi));
                                         UWL_list.add(ulog);
 
+                                        long insertID_ = db.insertUserWeightLog(ulog);
+                                        Toast.makeText(getApplicationContext(), insertID_ + " " , Toast.LENGTH_LONG).show();
 
 //                                        Toast.makeText(getApplicationContext(), username + " " + date + " " + weight + " " + bmi,
 //                                                Toast.LENGTH_LONG).show();
@@ -143,8 +147,6 @@ public class WeightLogActivity extends Activity {
 
                                 }
 
-
-
                             }
                         }, new Response.ErrorListener() {
                     @Override
@@ -158,7 +160,10 @@ public class WeightLogActivity extends Activity {
                     @Override
                     protected Map<String, String> getParams() {
                         Map<String, String> params = new HashMap<String, String>();
-                        params.put("username", "user@gmail.com");
+                        Intent intent = getIntent();
+                        String username = intent.getStringExtra("username");
+
+                        params.put("username", username);
 
                         return params;
                     }
