@@ -135,7 +135,6 @@ public class RegisterActivity extends Activity {
 
 
 
-
     private static Double calculateBMI(Double height,Double weight) {
 
         Double bmi; //

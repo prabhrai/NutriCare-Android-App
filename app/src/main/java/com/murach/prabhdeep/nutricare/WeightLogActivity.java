@@ -56,6 +56,9 @@ public class WeightLogActivity extends Activity {
     // temporary string to show the parsed response
     private String jsonResponse;
 
+    String username_text ;
+
+    UserWeightDB db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,13 +69,17 @@ public class WeightLogActivity extends Activity {
 
         Intent intent = getIntent();
         final String username = intent.getStringExtra("username");
+        username_text  = intent.getStringExtra("username");
 
 
-
-        final UserWeightDB db = new UserWeightDB(this);
+        db = new UserWeightDB(this);
         db.TrimDB();
 
+
         final Intent intent_add_log = new Intent(getApplicationContext(), AddLogActivity.class);
+
+        loadWeightList(db);
+
 
         Button btn_add = (Button) findViewById(R.id.btnAddUserWeightLog);
         btn_add.setOnClickListener(new View.OnClickListener() {
@@ -92,6 +99,7 @@ public class WeightLogActivity extends Activity {
 //        }
 //        Toast.makeText(getApplicationContext(), "DB Status " + insertId, Toast.LENGTH_SHORT).show();
 
+        /*
         Button btnn = (Button) findViewById(R.id.btnGetUserWeight);
         btnn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -197,12 +205,15 @@ public class WeightLogActivity extends Activity {
             }
         });
 
+        */
+
     }
 
 
 
     private void populateListView(UserWeightDB db){
 
+//        final UserWeightDB db2 = db;
 
         ll = (LinearLayout) findViewById(R.id.listViewHeader);
         ll.setVisibility(View.VISIBLE);
@@ -237,7 +248,115 @@ public class WeightLogActivity extends Activity {
 
     }
 
+
+    private void loadWeightList(UserWeightDB db){
+        final UserWeightDB db2 = db;
+
+        queue3 = Volley.newRequestQueue(getApplicationContext());
+        // Request a string response from the provided URL.
+        StringRequest stringRequest = new StringRequest(
+                Request.Method.POST, weightURL,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+//                                Toast.makeText(getApplicationContext(), response,
+//                                        Toast.LENGTH_SHORT).show();
+//                                JSONArray j = new JSONArray(response.t) ;
+                        try {
+                            JSONArray array = new JSONArray(response);
+                            for (int i = 0; i < array.length(); i++) {
+                                JSONObject object = array.getJSONObject(i);
+                                String username = object.getString("username");
+                                String date = object.getString("date");
+                                String weight = object.getString("weight");
+                                String bmi = object.getString("bmi");
+
+
+//                                        String username = person.getString("username");
+//                                        String date = person.getString("date");
+//                                        String weight = person.getString("weight");
+//                                        String bmi = person.getString("bmi");
+                                UserWeightLog ulog = new UserWeightLog();
+
+                                ulog.setUsername(username);
+                                ulog.setDate(date);
+                                ulog.setWeight(Double.parseDouble(weight));
+                                ulog.setBmi(Double.parseDouble(bmi));
+                                UWL_list.add(ulog);
+
+                                long insertID_ = db2.insertUserWeightLog(ulog);
+//                                        Toast.makeText(getApplicationContext(), insertID_ + " " , Toast.LENGTH_LONG).show();
+
+//                                        Toast.makeText(getApplicationContext(), username + " " + date + " " + weight + " " + bmi,
+//                                                Toast.LENGTH_LONG).show();
+
+                            }
+
+
+
+
+
+//                                    // create a List of Map<String, ?> objects
+//                                    ArrayList<HashMap<String, String>> data =
+//                                            new ArrayList<HashMap<String, String>>();
+//                                    for (UserWeightLog item : UWL_list) {
+//                                        HashMap<String, String> map = new HashMap<String, String>();
+//                                        map.put("date", item.getDate());
+//                                        map.put("weight", item.getWeight().toString());
+//                                        map.put("bmi", item.getBmi().toString());
+//
+//                                        data.add(map);
+//                                    }
+//
+////                                // create the resource, from, and to variables
+//                                    int resource = R.layout.listview_item;
+//                                    String[] from = {"date", "weight","bmi"};
+//                                    int[] to = { R.id.listDateTextView, R.id.listWeightTextView , R.id.listBMITextView};
+////
+//                                    // create and set the adapter
+//                                    SimpleAdapter adapter =
+//                                            new SimpleAdapter(getApplicationContext(), data, resource, from, to);
+//
+//                                    itemsListView.setAdapter(adapter);
+
+                            populateListView(db2);
+                        }
+                        catch (Exception e){
+
+                        }
+
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getApplicationContext(), error.toString(),
+                        Toast.LENGTH_SHORT).show();
+            }
+        }
+
+        ) { // query params
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<String, String>();
+
+
+                params.put("username", username_text);
+
+                return params;
+            }
+        };
+
+        // Add the request to the RequestQueue.
+        queue3.add(stringRequest);
+
+
+    }
+
+
+
 }
+
+
 
 
 

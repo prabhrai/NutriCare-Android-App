@@ -27,18 +27,19 @@
         android:layout_marginLeft="100dp"
         android:layout_marginRight="100dp"
         android:layout_marginTop="20sp"
+            android:layout_marginBottom="20sp"
         android:text="Add Weight Log" />
 
-        <Button
-            android:id="@+id/btnGetUserWeight"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="100dp"
-            android:layout_marginRight="100dp"
-            android:layout_marginTop="20sp"
-            android:layout_marginBottom="20sp"
+        <!--<Button-->
+            <!--android:id="@+id/btnGetUserWeight"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginLeft="100dp"-->
+            <!--android:layout_marginRight="100dp"-->
+            <!--android:layout_marginTop="20sp"-->
+            <!--android:layout_marginBottom="20sp"-->
 
-            android:text="Get Weight Log" />
+            <!--android:text="Get Weight Log" />-->
 
 
 

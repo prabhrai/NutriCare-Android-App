@@ -71,8 +71,8 @@ public class AddLogFragment extends Fragment
 
         username = getActivity().getIntent().getStringExtra("username");
 
-        Toast.makeText(context, username,
-                Toast.LENGTH_SHORT).show();
+//        Toast.makeText(context, username,
+//                Toast.LENGTH_SHORT).show();
 //        String username2 = getActivity().getIntent().getExtras().getString("username");
 //
 //        Toast.makeText(context,username2,
@@ -111,9 +111,6 @@ public class AddLogFragment extends Fragment
     @Override
     public void onClick(View v) {
 
-
-        Toast.makeText(context, "vvb",
-                Toast.LENGTH_SHORT).show();
 
 
         switch (v.getId()) {
