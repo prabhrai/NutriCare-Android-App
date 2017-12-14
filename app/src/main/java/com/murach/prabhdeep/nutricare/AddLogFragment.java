@@ -1,6 +1,7 @@
 package com.murach.prabhdeep.nutricare;
 
 import android.app.Fragment;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
@@ -19,27 +20,43 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.TextView.OnEditorActionListener;
+import android.widget.Toast;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+import java.util.Calendar;
+
 
 import java.text.NumberFormat;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 public class AddLogFragment extends Fragment
-        implements OnEditorActionListener, OnClickListener {
+        implements  OnClickListener {
+//    OnEditorActionListener,
+    private EditText txtUserWeight;
+    private Button btnSubmit;
+    private RequestQueue queue4;
+    String logURL = "https://nutricare.xyz/php/add_user_log.php";
 
-
+    private String username;
+    Context context;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-//        // set the default values for the preferences
-//        PreferenceManager.setDefaultValues(getActivity(),
-//                R.xml.preferences, false);
-//
-//        // get the default SharedPreferences object
-//        prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
-//
-//        // turn on the options menu
-//        setHasOptionsMenu(true);
+    // Getting application context
+        context = getActivity().getApplicationContext();
     }
 
     @Override
@@ -50,149 +67,125 @@ public class AddLogFragment extends Fragment
         View view = inflater.inflate(R.layout.fragment_add_log,
                 container, false);
 
+        txtUserWeight = (EditText) view.findViewById(R.id.txtUserCurrentWeight);
+        String tempWT = txtUserWeight.getText().toString();
+        try{
+            Double userWT = Double.parseDouble(tempWT);
+        }
+        catch (NumberFormatException n){
+
+        }
+
+        username = getActivity().getIntent().getStringExtra("username");
+
+        Toast.makeText(context, username,
+                Toast.LENGTH_SHORT).show();
+//        String username2 = getActivity().getIntent().getExtras().getString("username");
+//
+//        Toast.makeText(context,username2,
+//                Toast.LENGTH_SHORT).show();
+        btnSubmit = (Button) view.findViewById(R.id.btnSubmitUserLog);
+
+        btnSubmit.setOnClickListener(this);
 
         // return the View for the layout
         return view;
+
+
+
     }
 
-    @Override
-    public void onPause() {
-        // save the instance variables
-//        Editor editor = prefs.edit();
-//        editor.putString("billAmountString", billAmountString);
-//        editor.putFloat("tipPercent", tipPercent);
-//        editor.commit();
-
-        super.onPause();
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-
-//        // get preferences
-//        rememberTipPercent = prefs.getBoolean("pref_remember_percent", true);
-//        rounding = Integer.parseInt(prefs.getString("pref_rounding", "0"));
 //
-//        // get the instance variables
-//        billAmountString = prefs.getString("billAmountString", "");
-//        if (rememberTipPercent) {
-//            tipPercent = prefs.getFloat("tipPercent", 0.15f);
-//        } else {
-//            tipPercent = 0.15f;
+//    @Override
+//    public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+//        /*
+//        int keyCode = -1;
+//        if (event != null) {
+//            keyCode = event.getKeyCode();
+//        }
+//        if (actionId == EditorInfo.IME_ACTION_DONE ||
+//            actionId == EditorInfo.IME_ACTION_NEXT ||
+//            actionId == EditorInfo.IME_ACTION_UNSPECIFIED ||
+//            keyCode == KeyEvent.KEYCODE_DPAD_CENTER ||
+//            keyCode == KeyEvent.KEYCODE_ENTER) {
+//            calculateAndDisplay();
 //        }
 //
-//        // set the bill amount on its widget
-//        billAmountEditText.setText(billAmountString);
-
-        // calculate and display
-//        calculateAndDisplay();
-    }
-
-    public void calculateAndDisplay() {
-        /*
-        // get the bill amount
-        billAmountString = billAmountEditText.getText().toString();
-        float billAmount;
-        if (billAmountString.equals("")) {
-            billAmount = 0;
-        }
-        else {
-            billAmount = Float.parseFloat(billAmountString);
-        }
-
-        // calculate tip and total
-        float tipAmount = 0;
-        float totalAmount = 0;
-        float tipPercentToDisplay = 0;
-        if (rounding == ROUND_NONE) {
-            tipAmount = billAmount * tipPercent;
-            totalAmount = billAmount + tipAmount;
-            tipPercentToDisplay = tipPercent;
-        }
-        else if (rounding == ROUND_TIP) {
-            tipAmount = StrictMath.round(billAmount * tipPercent);
-            totalAmount = billAmount + tipAmount;
-            tipPercentToDisplay = tipAmount / billAmount;
-        }
-        else if (rounding == ROUND_TOTAL) {
-            float tipNotRounded = billAmount * tipPercent;
-            totalAmount = StrictMath.round(billAmount + tipNotRounded);
-            tipAmount = totalAmount - billAmount;
-            tipPercentToDisplay = tipAmount / billAmount;
-        }
-
-        // display the other results with formatting
-        NumberFormat currency = NumberFormat.getCurrencyInstance();
-        tipTextView.setText(currency.format(tipAmount));
-        totalTextView.setText(currency.format(totalAmount));
-
-        NumberFormat percent = NumberFormat.getPercentInstance();
-        percentTextView.setText(percent.format(tipPercentToDisplay));
-        */
-    }
-
-    @Override
-    public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-        /*
-        int keyCode = -1;
-        if (event != null) {
-            keyCode = event.getKeyCode();
-        }
-        if (actionId == EditorInfo.IME_ACTION_DONE ||
-            actionId == EditorInfo.IME_ACTION_NEXT ||
-            actionId == EditorInfo.IME_ACTION_UNSPECIFIED ||
-            keyCode == KeyEvent.KEYCODE_DPAD_CENTER ||
-            keyCode == KeyEvent.KEYCODE_ENTER) {
-            calculateAndDisplay();
-        }
-
-        */
-        return false;
-    }
+//        */
+//        return false;
+//    }
 
     @Override
     public void onClick(View v) {
-//        switch (v.getId()) {
-//        case R.id.percentDownButton:
-//            tipPercent = tipPercent - .01f;
-//            calculateAndDisplay();
-//            break;
-//        case R.id.percentUpButton:
-//            tipPercent = tipPercent + .01f;
-//            calculateAndDisplay();
-//            break;
-//        }
+
+
+        Toast.makeText(context, "vvb",
+                Toast.LENGTH_SHORT).show();
+
+
+        switch (v.getId()) {
+        case R.id.btnAddUserWeightLog:
+            String date = GetToday();
+
+
+            Toast.makeText(context, "vvdrgfb",
+                    Toast.LENGTH_SHORT).show();
+
+
+            queue4 = Volley.newRequestQueue(context);
+            // Request a string response from the provided URL.
+            StringRequest stringRequest = new StringRequest(
+                    Request.Method.POST, logURL,
+                    new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String response) {
+                            Toast.makeText(context, response.trim(),
+                                    Toast.LENGTH_SHORT).show();
+
+                            if (response.trim().equalsIgnoreCase("success")) {
+//                                startActivity(intent);
+                            }
+
+                        }
+                    }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Toast.makeText(context, error.toString(),
+                            Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            ) { // query params
+                @Override
+                protected Map<String, String> getParams() {
+                    Map<String, String> params = new HashMap<String, String>();
+                    params.put("user","");
+                    params.put("Current_Weight", "");
+                    params.put("full_date", "");
+
+                    return params;
+                }
+            };
+
+            // Add the request to the RequestQueue.
+            queue4.add(stringRequest);
+
+            Toast.makeText(context, "dafsdfdsfsdfsdf",
+                    Toast.LENGTH_SHORT).show();
+
+
+            break;
+
+        }
     }
 
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+    public static String GetToday(){
+        Date presentTime_Date = Calendar.getInstance().getTime();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+//        dateFormat.setTimeZone(TimeZone.getTimeZone("GMT"));
 
-//        // attempt to get an instance of the SettingsFragment object
-//        SettingsFragment settingsFragment = (SettingsFragment) getFragmentManager()
-//                .findFragmentById(R.id.settings_fragment);
-//
-//        // if the SettingsFragment object is null, display the appropriate menu
-//        if (settingsFragment == null) {
-//            inflater.inflate(R.menu.fragment_tip_calculator, menu);
-//        } else {
-//            inflater.inflate(R.menu.fragment_tip_calculator_twopane, menu);
-//        }
+        return dateFormat.format(presentTime_Date);
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-//        switch (item.getItemId()) {
-//            case R.id.menu_settings:
-//                startActivity(new Intent(getActivity(), SettingsActivity.class));
-//                return true;
-//            case R.id.menu_about:
-//                startActivity(new Intent(getActivity(), AboutActivity.class));
-//                return true;
-//
-//            default:
-//                return super.onOptionsItemSelected(item);
-//        }
-        return true;
-    }
+
 }

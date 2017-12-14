@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
@@ -46,6 +47,8 @@ public class WeightLogActivity extends Activity {
     private RequestQueue queue3;
     ArrayList<UserWeightLog> UWL_list = new ArrayList<UserWeightLog>();
 
+    LinearLayout ll;
+
 
 
     private ListView itemsListView;
@@ -74,8 +77,9 @@ public class WeightLogActivity extends Activity {
         Button btn_add = (Button) findViewById(R.id.btnAddUserWeightLog);
         btn_add.setOnClickListener(new View.OnClickListener() {
                                        public void onClick(View v) {
-                                           startActivity(intent_add_log);
                                            intent_add_log.putExtra("username",username);
+                                           startActivity(intent_add_log);
+
                                        }
 
                                    });
@@ -99,8 +103,8 @@ public class WeightLogActivity extends Activity {
                         new Response.Listener<String>() {
                             @Override
                             public void onResponse(String response) {
-                                Toast.makeText(getApplicationContext(), response,
-                                        Toast.LENGTH_SHORT).show();
+//                                Toast.makeText(getApplicationContext(), response,
+//                                        Toast.LENGTH_SHORT).show();
 //                                JSONArray j = new JSONArray(response.t) ;
                                 try {
                                     JSONArray array = new JSONArray(response);
@@ -132,28 +136,34 @@ public class WeightLogActivity extends Activity {
 
                                     }
 
-                                    // create a List of Map<String, ?> objects
-                                    ArrayList<HashMap<String, String>> data =
-                                            new ArrayList<HashMap<String, String>>();
-                                    for (UserWeightLog item : UWL_list) {
-                                        HashMap<String, String> map = new HashMap<String, String>();
-                                        map.put("date", item.getDate());
-                                        map.put("weight", item.getWeight().toString());
-                                        map.put("bmi", item.getBmi().toString());
 
-                                        data.add(map);
-                                    }
 
-//                                // create the resource, from, and to variables
-                                    int resource = R.layout.listview_item;
-                                    String[] from = {"date", "weight","bmi"};
-                                    int[] to = { R.id.listDateTextView, R.id.listWeightTextView , R.id.listBMITextView};
+
+
+//                                    // create a List of Map<String, ?> objects
+//                                    ArrayList<HashMap<String, String>> data =
+//                                            new ArrayList<HashMap<String, String>>();
+//                                    for (UserWeightLog item : UWL_list) {
+//                                        HashMap<String, String> map = new HashMap<String, String>();
+//                                        map.put("date", item.getDate());
+//                                        map.put("weight", item.getWeight().toString());
+//                                        map.put("bmi", item.getBmi().toString());
 //
-                                    // create and set the adapter
-                                    SimpleAdapter adapter =
-                                            new SimpleAdapter(getApplicationContext(), data, resource, from, to);
+//                                        data.add(map);
+//                                    }
+//
+////                                // create the resource, from, and to variables
+//                                    int resource = R.layout.listview_item;
+//                                    String[] from = {"date", "weight","bmi"};
+//                                    int[] to = { R.id.listDateTextView, R.id.listWeightTextView , R.id.listBMITextView};
+////
+//                                    // create and set the adapter
+//                                    SimpleAdapter adapter =
+//                                            new SimpleAdapter(getApplicationContext(), data, resource, from, to);
+//
+//                                    itemsListView.setAdapter(adapter);
 
-                                    itemsListView.setAdapter(adapter);
+                                    populateListView(db);
                                 }
                                 catch (Exception e){
 
@@ -184,13 +194,46 @@ public class WeightLogActivity extends Activity {
                 queue3.add(stringRequest);
 
 
-
-
-
-
-
             }
         });
+
+    }
+
+
+
+    private void populateListView(UserWeightDB db){
+
+
+        ll = (LinearLayout) findViewById(R.id.listViewHeader);
+        ll.setVisibility(View.VISIBLE);
+
+        // create a List of Map<String, ?> objects
+        ArrayList<UserWeightLog> db_List = db.getUserWeightLog();
+
+
+        ArrayList<HashMap<String, String>> data =
+                new ArrayList<HashMap<String, String>>();
+        for (UserWeightLog item : db_List) {
+            HashMap<String, String> map = new HashMap<String, String>();
+            map.put("date", item.getDate());
+            map.put("weight", item.getWeight().toString());
+            map.put("bmi", item.getBmi().toString());
+
+            data.add(map);
+        }
+
+
+
+        // create the resource, from, and to variables
+        int resource = R.layout.listview_item;
+        String[] from = {"date", "weight","bmi"};
+        int[] to = { R.id.listDateTextView, R.id.listWeightTextView , R.id.listBMITextView};
+//
+        // create and set the adapter
+        SimpleAdapter adapter =
+                new SimpleAdapter(getApplicationContext(), data, resource, from, to);
+
+        itemsListView.setAdapter(adapter);
 
     }
 
@@ -198,113 +241,3 @@ public class WeightLogActivity extends Activity {
 
 
 
-
-
-
-/*
-
-
-// on cancel , go back to login
-
-        Button getLog = (Button) findViewById(R.id.btnGetUserWeight2);
-        getLog.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-//                final Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
-//                startActivity(intent);
-
-                final TextView txtresponse2 = (TextView) findViewById(R.id.txtresponseweight);
-                queue2 = Volley.newRequestQueue(getApplicationContext());
-
-//                JsonArrayRequest js = new JsonArrayRequest( Request.Method.POST, weightURL, null, new Response.Listener<JSONArray>(
-
-
-                JsonArrayRequest jsObjRequest = new JsonArrayRequest
-                        (Request.Method.POST, weightURL, null, new Response.Listener<JSONArray>() {
-
-                            @Override
-                            public void onResponse(JSONArray response) {
-//                                txtresponse2.setText(response.toString());
-////                                txtresponse2.setText("good" );
-//                                Log.d("JSON", response.toString());
-//
-//                                Log.d("JSON", response.toString());
-                                Log.d("TAG", response.toString());
-
-                                try {
-                                    // Parsing json array response
-                                    // loop through each json object
-                                    jsonResponse = "";
-                                    for (int i = 0; i < response.length(); i++) {
-
-                                        JSONObject person = (JSONObject) response.get(i);
-
-
-
-
-//                                        String home = phone.getString("home");
-//                                        String mobile = phone.getString("mobile");
-//
-//                                        jsonResponse += "date: " + date + "\n\n";
-//                                        jsonResponse += "weight: " + weight + "\n\n";
-//                                        jsonResponse += "bmi: " + bmi + "\n\n\n";
-//                                        jsonResponse += "Mobile: " + mobile + "\n\n\n";
-
-                                    }
-
-                                    txtresponse2.setText(jsonResponse);
-
-                                } catch (JSONException e) {
-                                    e.printStackTrace();
-                                    Toast.makeText(getApplicationContext(),
-                                            "Error: " + e.getMessage(),
-                                            Toast.LENGTH_LONG).show();
-                                }
-
-                            }
-                        }, new Response.ErrorListener() {
-
-                            @Override
-                            public void onErrorResponse(VolleyError error) {
-                                // TODO Auto-generated method stub
-                                txtresponse2.setText(error.toString());
-                            }
-                        }) {
-                    @Override
-                    protected Map<String, String> getParams() {
-                        Map<String, String> params = new HashMap<String, String>();
-                        params.put("username", "user@gmail.com");
-                        return params;
-                    }
-                };
-
-                // Access the RequestQueue through your singleton class.
-                queue2.add(jsObjRequest);
-                Log.d("Added req", "test");
-
-
-
-
-//
-//                // set the title for the feed
-////                titleTextView.setText(feed.getTitle());
-//
-//                // get the items for the feed
-//                List<RSSItem> items = feed.getAllItems();
-//
-
-//
-//                Log.d("News reader", "Feed displayed");
-//
-//
-
-                //      LoginActivity.getInstance(this).addToRequestQueue(jsObjRequest);
-
-                //display in short period of time
-                Toast.makeText(getApplicationContext(), "Toast after req",
-                        Toast.LENGTH_SHORT).show();
-
-            }
-        });
-
-
-*/

@@ -39,6 +39,42 @@
             android:text="Get Weight Log TOAST" />
 
 
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="4.6"
+        android:id="@+id/listViewHeader"
+        android:visibility="gone">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="2.4"
+            android:text="Date"
+            android:textAlignment="viewStart"
+            android:textSize="18sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Weight"
+            android:textAlignment="viewStart"
+            android:textSize="18sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.2"
+            android:text="BMI"
+            android:textAlignment="viewStart"
+            android:textSize="18sp" />
+
+
+    </LinearLayout>
+
     <ListView
         android:id="@+id/itemsListView"
         android:layout_width="match_parent"
