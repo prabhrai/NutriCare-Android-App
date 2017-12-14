@@ -76,8 +76,8 @@
             android:switchPadding="20sp"
 
             android:text="Remember Username "
-            android:thumbTint="@color/colorPrimary"
-            android:trackTint="@android:color/white" />
+            android:thumbTint="@android:color/black"
+            android:trackTint="@android:color/black" />
 
 
 

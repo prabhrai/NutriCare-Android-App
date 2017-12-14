@@ -67,14 +67,7 @@ public class AddLogFragment extends Fragment
         View view = inflater.inflate(R.layout.fragment_add_log,
                 container, false);
 
-        txtUserWeight = (EditText) view.findViewById(R.id.txtUserCurrentWeight);
-        String tempWT = txtUserWeight.getText().toString();
-        try{
-            Double userWT = Double.parseDouble(tempWT);
-        }
-        catch (NumberFormatException n){
 
-        }
 
         username = getActivity().getIntent().getStringExtra("username");
 
@@ -124,12 +117,31 @@ public class AddLogFragment extends Fragment
 
 
         switch (v.getId()) {
-        case R.id.btnAddUserWeightLog:
-            String date = GetToday();
+        case R.id.btnSubmitUserLog:
+            final String log_date = GetToday();
+
+            final Intent loginIntent = new Intent(context,LoginActivity.class);
+
+            txtUserWeight = (EditText) getView().findViewById(R.id.txtUserCurrentWeight);
+            final String tempWT = txtUserWeight.getText().toString();
+            Double userWT = null;
+            try{
+                 userWT = Double.parseDouble(tempWT);
+            }
+            catch (NumberFormatException n){
+                Toast.makeText(context, "Invalid Input.",
+                        Toast.LENGTH_SHORT).show();
+            }
+
+            if(tempWT.equalsIgnoreCase("") || userWT == null  ){
+                Toast.makeText(context, "Invalid Input.",
+                        Toast.LENGTH_SHORT).show();
+                return;
+            }
 
 
-            Toast.makeText(context, "vvdrgfb",
-                    Toast.LENGTH_SHORT).show();
+//            Toast.makeText(context, "vvdrgfb" + date ,
+//                    Toast.LENGTH_SHORT).show();
 
 
             queue4 = Volley.newRequestQueue(context);
@@ -139,11 +151,19 @@ public class AddLogFragment extends Fragment
                     new Response.Listener<String>() {
                         @Override
                         public void onResponse(String response) {
-                            Toast.makeText(context, response.trim(),
-                                    Toast.LENGTH_SHORT).show();
+//                            Toast.makeText(context, response.trim(),
+//                                    Toast.LENGTH_SHORT).show();
 
                             if (response.trim().equalsIgnoreCase("success")) {
-//                                startActivity(intent);
+
+                                Toast.makeText(context, "Log Added Successfully",
+                                        Toast.LENGTH_SHORT).show();
+                                startActivity(loginIntent);
+                            }
+                            else if (response.trim().equalsIgnoreCase("failure")) {
+
+                                Toast.makeText(context, "Log Addition Failed.",
+                                        Toast.LENGTH_SHORT).show();
                             }
 
                         }
@@ -159,9 +179,9 @@ public class AddLogFragment extends Fragment
                 @Override
                 protected Map<String, String> getParams() {
                     Map<String, String> params = new HashMap<String, String>();
-                    params.put("user","");
-                    params.put("Current_Weight", "");
-                    params.put("full_date", "");
+                    params.put("user",username);
+                    params.put("Current_Weight", tempWT);
+                    params.put("full_date", log_date);
 
                     return params;
                 }
@@ -170,8 +190,8 @@ public class AddLogFragment extends Fragment
             // Add the request to the RequestQueue.
             queue4.add(stringRequest);
 
-            Toast.makeText(context, "dafsdfdsfsdfsdf",
-                    Toast.LENGTH_SHORT).show();
+//            Toast.makeText(context, "",
+//                    Toast.LENGTH_SHORT).show();
 
 
             break;
