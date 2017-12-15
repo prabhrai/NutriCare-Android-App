@@ -140,7 +140,7 @@ public class LoginActivity extends Activity {
 
         // delete
 //        usernameET.setText("user@gmail.com");
-        passwordET.setText("password");
+//        passwordET.setText("password");
 
 
         // ------------------------------------------------------------------------------------------------ get user login
